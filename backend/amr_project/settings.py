@@ -114,3 +114,43 @@ try:
     from .local_settings import *
 except Exception:
     pass
+
+# === Upload limits ===
+# ~10 MB in-memory parse; larger files will be streamed (tweak as needed)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+
+
+# Deployment settings for Render
+import dj_database_url
+import os
+
+# Database configuration for Neon
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
+
+# Security settings for production
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.onrender.com,localhost,127.0.0.1').split(',')
+
+# Static files configuration
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Whitenoise for static files
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "https://your-app.netlify.app",
+    "http://localhost:3000",
+]
+
+# Use environment variable for secret key
+SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
