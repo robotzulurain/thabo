@@ -1,0 +1,53 @@
+# Django
+*.pyc
+__pycache__/
+*.sqlite3
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Environment variables
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Static files
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node.js (frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Backup files
+*.bak*
+backups/
+
+# CSV files (you might want to keep some, but generally ignore data files)
+*.csv
+
+# Virtual environment
+backend/venv/
+venv/
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: thabo-medical-app
+    env: python
+    plan: free
+    region: ohio
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn amr_project.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        value: "postgresql://neondb_owner:npg_68AGChuOcZsB@ep-green-cloud-ad34rcz7-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
