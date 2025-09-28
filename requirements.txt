@@ -9,3 +9,4 @@ django-filter
 pandas
 openpyxl
 python-dateutil
+python-dotenv
