@@ -5,13 +5,15 @@ services:
     plan: free
     region: ohio
     buildCommand: "./build.sh"
-    startCommand: "gunicorn amr_project.wsgi:application"
+    startCommand: "gunicorn backend.amr_project.wsgi:application"
     envVars:
       - key: DATABASE_URL
-        value: "postgresql://neondb_owner:npg_68AGChuOcZsB@ep-green-cloud-ad34rcz7-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
+        value: "postgresql://neondb_owner:npg_68AGChuOcZsB@ep-green-cloud-ad34rcz7-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: ".onrender.com"
+        value: ".onrender.com,thabom.netlify.app"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://thabom.netlify.app"
