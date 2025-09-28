@@ -20,7 +20,12 @@ except ImportError:
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Force DEBUG=False on Render (production)
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+# On Render, always set DEBUG=False for security
+if 'RENDER' in os.environ or 'onrender.com' in os.environ.get('ALLOWED_HOSTS', ''):
+    DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,.onrender.com').split(',')
 
